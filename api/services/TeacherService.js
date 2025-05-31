@@ -13,16 +13,18 @@ module.exports = {
 
             //specific fields
             // const teachers = await Teacher.find().select(['name', 'email']);
-            
+
             return teachers;
 
     },
 
     findById: async function (id) {
             const teacher = await Teacher.findOne({ id });
+            
             if (!teacher) {
                 throw new Error('Teacher not found');
             }
+
             return teacher;
         
     },
