@@ -61,14 +61,14 @@ create: async function (req, res) {
       const id = req.params.id;
       const data = await TeacherService.findById(id);
 
-      if (!data) {
-        return sails.helpers.customresponse.with({
-          res,
-          data: null,
-          message: 'Teacher not found',
-          statusCode: 404
-        });
-      }
+      // if (!data) {
+      //   return sails.helpers.customresponse.with({
+      //     res,
+      //     data: null,
+      //     message: 'Teacher not found',
+      //     statusCode: 400
+      //   });
+      // }
 
       return sails.helpers.customresponse.with({
         res,
@@ -82,7 +82,7 @@ create: async function (req, res) {
         res,
         data: null,
         message: err.message || 'Something went wrong',
-        statusCode: err.status || 500
+        statusCode: err.statusCode || 500
       });
     }
   },

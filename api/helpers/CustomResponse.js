@@ -25,15 +25,32 @@ module.exports = {
     }
   },
 
-  fn: async function (inputs, exits) {
-    const { res, data, message, statusCode } = inputs;
+  // fn: async function (inputs, exits) {
+  //   const { res, data, message, statusCode } = inputs;
 
-    return exits.success(
-      res.status(statusCode).json({
-        success: statusCode >= 200 && statusCode < 300,
-        message,
-        data
-      })
-    );
-  }
+  //   return exits.success(
+  //     res.status(statusCode).json({
+  //       success: statusCode >= 200 && statusCode < 300,
+  //       message,
+  //       data
+  //     })
+  //   );
+  // }
+
+  fn: async function (inputs) {
+  const { res, data, message, statusCode } = inputs;
+
+  console.log('Custom Response:', {
+    statusCode,
+    message,
+    data
+  });
+  return res.status(statusCode).json({
+    
+    success: statusCode >= 200 && statusCode < 300,
+    message,
+    data: data || null
+  });
+}
+
 };

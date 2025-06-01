@@ -21,8 +21,10 @@ module.exports = {
     findById: async function (id) {
             const teacher = await Teacher.findOne({ id });
             
-            if (!teacher) {
-                throw new Error('Teacher not found');
+            if (!teacher) { 
+                const error = new Error('Teacher not found');
+                error.statusCode = 400;
+                throw error;
             }
 
             return teacher;
@@ -33,7 +35,9 @@ module.exports = {
 
             const updatedTeacher = await Teacher.updateOne({ id }).set(teacherData);
             if (!updatedTeacher) {
-                throw new Error('Teacher not found');
+                const error =  new Error('Teacher not found');
+                error.statusCode = 400;
+                throw error;
             }
             return updatedTeacher;
         
