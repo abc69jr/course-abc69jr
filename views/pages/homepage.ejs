@@ -76,3 +76,20 @@ setTimeout(function sunrise () {
     </div>
   </div>
 </div>
+
+<!-- test -->
+<script>
+    fetch('/api/teacher/findall')
+      .then(res => res.json())
+      .then(response => {
+        const list = document.getElementById('teacher-list');
+        response.data.forEach(teacher => {
+          const li = document.createElement('li');
+          li.textContent = `${teacher.name} - ${teacher.age} tuổi`;
+          list.appendChild(li);
+        });
+      })
+      .catch(error => {
+        console.error('Lỗi khi lấy danh sách giáo viên:', error);
+      });
+  </script>
