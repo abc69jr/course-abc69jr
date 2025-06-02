@@ -131,7 +131,43 @@ create: async function (req, res) {
         statusCode: err.status || 500
       });
     }
+  },
+
+  findByNameAndAge: async function (req, res) {
+  try {
+    const { name, age } = req.query; // hoặc req.body nếu dùng POST
+
+    // const results = await Teacher.find({
+    //   where: {
+    //     and: [
+    //       { gender: 'male' },
+    //       {
+    //         or: [
+    //           { name: 'Nam' },
+    //           { yearOfBirth: targetYearOfBirth }
+    //         ]
+    //       }
+    //     ]
+    //   }
+    // });
+
+    const data = await TeacherService.findByNameAndAge(name, parseInt(age));
+    return sails.helpers.customresponse.with({
+      res,
+      data,
+      message: 'Found teacher(s)',
+      statusCode: 200
+    });
+  } catch (err) {
+    console.error('Error:', err);
+    return sails.helpers.customresponse.with({
+      res,
+      data: null,
+      message: err.message || 'Something went wrong',
+      statusCode: 500
+    });
   }
+}
 
 };
 

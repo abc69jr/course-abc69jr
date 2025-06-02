@@ -36,6 +36,18 @@ module.exports = {
       type: 'ref',         
       columnType: 'datetime', 
       required: true,
+      custom: function(value) {
+        const date = new Date(value);
+        if (isNaN(date.getTime())) return false;
+
+        const today = new Date();
+        if (date > today) return false;
+
+        const age = today.getFullYear() - date.getFullYear();
+        if (age < 0 || age > 120) return false;
+
+        return true;
+      },
       description: 'Ngày sinh của người dùng',
       example: '1990-01-01T00:00:00Z'
     }
